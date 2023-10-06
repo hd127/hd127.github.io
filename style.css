@@ -1,0 +1,35 @@
+.nav{
+    background-color:gainsboro;
+    display: flex;
+    margin-bottom: 1%;
+    justify-content:center;
+    font-size: xx-large;
+};
+
+.nav b.active {
+    background-color: yellow;
+    color: blueviolet;
+}
+
+.nav :hover{
+    background-color: aqua;
+}
+
+.nav b{
+    margin-right: 5%;
+}
+
+
+
+.container {
+    
+    margin-top: 2%;
+
+    font-size: xx-large;
+}
+
+
+#uichart{
+    width: 100%;
+    height: 500px;
+}

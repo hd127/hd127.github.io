@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;,">
+    <script src="js/ws.js"></script>
+    <script src="js/sandiantu.js"></script>
+    <script src="js/chart.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/ecStat.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电压电流采集</title>
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+<body>
+    <div class="nav">
+        <b id="label1" onclick="caiji()" >采集</b>
+        <b id="label2" onclick="dushu()" >读数</b> 
+        <b id="label3" onclick="showui()" >U-I</b>
+       
+    </div>
+    
+    <div id="caiji">
+        <button onclick="start()" >&#9654; 开始</button> <!-- 实心三角形图标 -->
+        <button onclick="pause()">&#10074;&#10074; 暂停</button> <!-- 双竖线图标 -->
+        <button onclick="reset()">&#8634; 重置</button> <!-- 旋转箭头图标 -->
+        <button onclick="copydata()">&#128203; 复制数据</button> <!-- 剪贴板图标 -->
+        <canvas id="chartid"></canvas>
+    </div>
+    
+    <div id="dushu"  class="container">
+
+        <canvas id="dianliubiao" width="800" height="300"></canvas>
+        <label>电流(A): &nbsp;</label>
+        <label id="dianliu" style="color: brown;">0</label>
+        <br>
+        <canvas id="dianyabiao" width="800" height="300"></canvas>
+
+        <label>电压 (V):&nbsp;&nbsp; &nbsp; </label>
+        <label id="dianya" style="color: brown;">0</label>
+        <br>
+        <canvas id="gonglvbiao" width="800" height="300"></canvas>
+
+        <label>功率(w): &nbsp; </label>
+        <label id="gonglv" style="color: brown;">0</label>
+    </div>
+
+    <div id="ui">
+        <button onclick="start()" >&#9654; 开始</button> <!-- 实心三角形图标 -->
+        <button onclick="pause()">&#10074;&#10074; 暂停</button> <!-- 双竖线图标 -->
+        <button onclick="reset()">&#8634; 重置</button> <!-- 旋转箭头图标 -->
+        <button onclick="copydata1()">&#128203; 复制数据</button> <!-- 剪贴板图标 -->
+        <label id="label4"></label> 
+        <div id="uichart"></div>
+        
+
+    </div>
+
+
+</body>
+
+<script>
+document.getElementById("caiji").style.display = "none";
+document.getElementById('label2').style.background="white";
+
+function caiji(){
+    document.getElementById("caiji").style.display = "block";
+    document.getElementById("dushu").style.display = "none";
+    document.getElementById('label1').style.background="white";
+    document.getElementById('label2').style.background="gainsboro";
+    document.getElementById('label3').style.background="gainsboro";
+    document.getElementById('ui').style.display="none";
+
+
+}
+function dushu(){
+    document.getElementById("caiji").style.display = "none";
+    document.getElementById("dushu").style.display = "block";
+    document.getElementById('label2').style.background="white";
+    document.getElementById('label1').style.background="gainsboro";
+    document.getElementById('label3').style.background="gainsboro";
+    document.getElementById('ui').style.display="none";
+
+
+}
+function showui(){
+    document.getElementById("caiji").style.display = "none";
+    document.getElementById("dushu").style.display = "none";
+    document.getElementById('label2').style.background="gainsboro";
+    document.getElementById('label1').style.background="gainsboro";
+    document.getElementById('label3').style.background="white";
+    document.getElementById('ui').style.display="block";
+}
+
+
+dataPlot = new Chart(document.getElementById("chartid"), {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [ 
+            {
+                data: [],
+                label: "电流(A)",
+                borderColor: "green",
+                fill: false
+            },{
+                data: [],
+                label: "电压(V)",
+                borderColor: "red",
+                fill: false
+            },{
+                data: [],
+                label: "功率(w)",
+                borderColor: "black",
+                fill: false,
+                spanGaps: true
+            } ]
+        },
+    
+        options :{
+            animation: false,
+            legend: {  
+                position: 'left', // 将图例放置在右上角  
+              },  
+            scales: {
+                y:{
+                    suggestedMin: 0,
+                    suggestedMax: 3, 
+                },
+                x:{
+
+                    title: {
+                        display: true,
+                        text: '时间(s)',
+                    },
+                    ticks: {
+                        display:true,  
+                    },
+                }
+            }
+        }
+        });
+
+
+
+
+
+</script>
+
+
+
+
+
+</html>
