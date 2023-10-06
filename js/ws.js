@@ -3,7 +3,7 @@
 //设置网关
 // var gateway = `ws://${window.location.hostname}/ws`;
 
-var gateway = `ws://${"192.168.99.175"}/ws`;    
+var gateway = `wss://${"192.168.99.175"}/ws`;    
 // var gateway = `ws://${"192.168.4.1"}/ws`;    
 
 
